@@ -1,0 +1,15 @@
+
+package.json
+/dist
+/service-online
+.eslintignore
+.editorconfig
+Dockerfile*
+.gitignore
+.prettierignore
+LICENSE
+.eslintcache
+*.lock
+yarn-error.log
+.history
+CNAME

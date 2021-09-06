@@ -1,0 +1,72 @@
+html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+p,
+ul,
+ol,
+li {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+body {
+  font-size: var(--am-font-size-main) !important;
+}
+span {
+  display: inline-block;
+}
+i {
+  font-style: normal;
+}
+.mb-40 {
+  margin-bottom: 40px;
+}
+#root .mt-40 {
+  margin-top: 40px;
+}
+#root {
+  height: 100%;
+  color: #666;
+  font-size: 32px;
+
+  --am-color-primary: #2d6ece;
+  --am-color-success: #21b0dc;
+  --am-color-light: #c7c7c7;
+}
+.app-wrap {
+  position: relative;
+  height: 100%;
+  background: #eee;
+}
+.in-w {
+  max-width: 750px;
+  margin: 0 auto;
+}
+
+/* antd-mobeil 样式覆盖 */
+
+/* :root {
+  --am-color-primary: #2d6ece;
+  --am-color-success: #21b0dc;
+  --am-color-light: #c7c7c7;
+} */
+#root .am-input {
+  font-size: 30px;
+}
+#root .am-button {
+  height: 98px;
+  padding: 0;
+  font-size: 32px;
+  border-radius: 8px;
+}
+
+/* .am-infinite-scroll {
+  font-size: 26px;
+}
+.am-input-clear .anticon {
+  font-size: 26px;
+} */

@@ -1,0 +1,21 @@
+{
+  "presets": [
+    "@babel/preset-env", // 👉 根据配置的目标浏览器或者运行环境，选择对应的语法包，从而将代码进行转换
+    ["@babel/preset-react", { "runtime": "automatic" }], // 👉 react 语法包，支持JSX、TSX语法格式 classic 旧的转换， automatic 新的转换
+    "@babel/preset-typescript" // 👉 https://github.com/babel/babel/issues/10570
+  ],
+  "plugins": [
+    "@babel/plugin-transform-runtime", // 👉 官方提供的插件，作用是减少冗余的代码
+    "@babel/plugin-proposal-class-properties", // 转换语法特性“类属性”
+    "@babel/plugin-proposal-object-rest-spread", // 转换语法特性“对象张开”
+    [
+      "@babel/plugin-transform-modules-commonjs", // 👉 将 ECMAScript modules 转成 CommonJS.
+      {
+        "allowTopLevelThis": true,
+        "loose": true,
+        "lazy": true
+      }
+    ],
+    // ["import", { "libraryName": "antd", "style": "css" }] // antd 按需加载 `style: true` 会加载 less 文件
+  ]
+}
