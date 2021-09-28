@@ -2,6 +2,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const TerserWebpackPlugin = require('terser-webpack-plugin');
+// const CopyWebapckPlugin = require('copy-webpack-plugin');
 const WebpackBar = require('webpackbar');
 const webpack = require('webpack');
 // 分析打包大小
@@ -11,7 +12,7 @@ module.exports = {
   mode: 'production',
   output: {
     clean: true, // 清除打包产物
-    publicPath: '/',
+    publicPath: '/dist/',
   },
   module: {
     rules: [
@@ -74,9 +75,11 @@ module.exports = {
     ],
   },
   optimization: {
-    usedExports: true,
-    // 开启代码压缩
-    minimize: true,
+    // optimization  集中配置 Webpack 内置优化功能
+    usedExports: true, // 模块只导出被使用的成员
+    minimize: true, // 开启代码压缩
+    concatenateModules: true, // 尽可能合并每一个模块到一个函数中
+    sideEffects: true, // 开启 sideEffect 生产环境默认开启
     minimizer: [
       new TerserWebpackPlugin({
         extractComments: false, // 不将注释提取到单独的文件中 即不生成 LICENSE.txt 文件
@@ -96,7 +99,7 @@ module.exports = {
     // 值为"single"会创建一个在所有生成chunk之间共享的运行时文件
     runtimeChunk: 'single',
     splitChunks: {
-      // 设置为all, chunk可以在异步和非异步chunk之间共享。
+      // 自动提取所有公共模块到单独 bundle
       chunks: 'all',
       cacheGroups: {
         vendor: {
@@ -135,7 +138,7 @@ module.exports = {
     // 添加进度条
     new WebpackBar({ profile: true }),
     new HtmlWebpackPlugin({
-      title: '广州市人民检察院网上检察院',
+      title: 'xf-cli',
       filename: 'index.html',
       template: './public/index.html',
       favicon: './public/favicon.ico',
@@ -163,6 +166,12 @@ module.exports = {
       'process.env.BASE_URL': JSON.stringify('/'),
       'process.env.API_URI': JSON.stringify('https://upiptest.hcfdev.cn/kwy'),
     }),
+    // 拷贝静态文件
+    // new CopyWebapckPlugin({
+    //   patterns: [
+    //     {from: './public/static/*', to: "dist"}
+    //   ],
+    // }),
     // 分析打包大小
     new BundleAnalyzerPplugin(),
   ],

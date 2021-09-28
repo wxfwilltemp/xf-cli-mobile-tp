@@ -44,9 +44,9 @@ declare interface Window {
   Print: any;
   http: any;
 }
-// declare interface React {
-//   request?: any;
-// }
+declare interface NodeModule {
+  hot: any;
+}
 
 // declare const utils: any;
 // declare const hooks: any;

@@ -1,4 +1,5 @@
-import ReactDom from 'react-dom';
+// import ReactDom from 'react-dom';
+import { render } from 'react-dom';
 import RouterFn from './router/index';
 import { setRem } from './utils/index';
 
@@ -24,14 +25,39 @@ window.onresize = () => {
   setRem();
 };
 
-const App = (): any => {
-  return (
-    <PersistGate loading={null} persistor={persistor}>
-      <Provider store={store}>
-        <RouterFn />
-      </Provider>
-    </PersistGate>
-  );
+const App = {
+  run() {
+    render(
+      <PersistGate loading={null} persistor={persistor}>
+        <Provider store={store}>
+          <RouterFn />
+        </Provider>
+      </PersistGate>,
+      document.getElementById('root'),
+    );
+  },
 };
 
-ReactDom.render(<App></App>, document.getElementById('root'));
+App.run();
+
+// 配置模块热替换
+if (module.hot) {
+  module.hot.accept();
+  // module.hot.accept('./router', () => {
+  //   console.log('更新了哈');
+  //   App.run();
+  // });
+}
+
+// 不开启 HRM
+// const App = (): any => {
+//   return (
+//     <PersistGate loading={null} persistor={persistor}>
+//       <Provider store={store}>
+//         <RouterFn />
+//       </Provider>
+//     </PersistGate>
+//   );
+// };
+
+// ReactDom.render(<App></App>, document.getElementById('root'));

@@ -15,8 +15,8 @@ module.exports = {
   },
   devtool: 'eval-cheap-module-source-map',
   devServer: {
-    // contentBase: path.join(__dirname, "./public"), // 静态资源的跟目录，即不受webpack控制的资源文件，放这里
-    hot: true,
+    // static: path.resolve(__dirname, '../public'), // static静态资源的跟目录，即不受webpack控制的资源文件，放这里
+    hot: true, // / 开启 HMR 特性，如果资源不支持 HMR 会 fallback 到 live reloading
     open: true,
     port: PORT,
     // historyApiFallback: true,
@@ -87,10 +87,12 @@ module.exports = {
     ],
   },
   plugins: [
+    // HMR 特性所需要的插件
+    new webpack.HotModuleReplacementPlugin(),
     // 添加进度条
     new WebpackBar({ profile: true }),
     new HtmlWebapckPlugin({
-      title: '广州检察互联网',
+      title: 'xf-cli',
       template: './public/index.html',
       cdn: {
         css: [],
